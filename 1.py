@@ -1,0 +1,60 @@
+# create a list of cars as dictionaries
+cars = [
+    {'car_id':"Coo1",'make':"Toyota",'model':"Innova",'year':2022,'available':True},
+    {'car_id':"Coo2",'make':"Honda",'model':"Accord",'year':2022,'available':True},
+    {'car_id':"Coo3",'make':"Maruti",'model':"Swaft",'year':2022,'available':True}
+]
+
+#create a list of customers as dictionaries
+customers = [
+    {'customer_id':"CU001",'name':"Nikita Vaidya",'rented_cars':[]},
+    {'customer_id':"CU002",'name':"Harsh Dubey",'rented_cars':[]},
+    {'customer_id':"CU003",'name':"Shivam Meshram",'rented_cars':[]}
+]
+
+#creat a list to store rentals as dictionaries
+rentals = []
+
+#function to rent a car
+def rent_car(customer,car):
+    if car['available']:
+        car['available'] = False
+        customer['rented_cars'].append(car)
+        return True
+    return False
+
+#function to return a car
+def return_car(customer,car):
+    if car in customer['rented_cars']:
+        car['available'] = True
+        customer['rented_cars'].remove(car)
+        return True
+    return False
+
+#rent cars
+rent_car(customers[0],cars[0])
+rent_car(customers[1],cars[1])
+rent_car(customers[2],cars[2])
+
+#Display rented cars for customers
+print(f"{customers[0]['name']}'s Rented Cars: {[car['make'] for car in customers[0]['rented_cars']]}")
+print(f"{customers[1]['name']}'s Rented Cars: {[car['make'] for car in customers[1]['rented_cars']]}")
+print(f"{customers[2]['name']}'s Rented Cars: {[car['make'] for car in customers[2]['rented_cars']]}")
+
+#return cars
+return_car(customers[0],cars[0])
+return_car(customers[2],cars[2])
+
+# Display updated rented cars for customers
+print(f"{customers[0]['name']}'s Updated Rented Cars: {[car['make'] for car in customers[0]['rented_cars']]}")
+print(f"{customers[1]['name']}'s Updated Rented Cars: {[car['make'] for car in customers[1]['rented_cars']]}")
+print(f"{customers[2]['name']}'s Updated Rented Cars: {[car['make'] for car in customers[2]['rented_cars']]}")
+
+#create rentals and add to the list
+rentals.append({'rental_id': "Roo1",'customer': customers[0], 'car': cars[0],'rental_fee': 500.0})
+rentals.append({'rental_id': "Roo2",'customer': customers[1], 'car': cars[1],'rental_fee': 450.0})
+rentals.append({'rental_id': "Roo3",'customer': customers[2], 'car': cars[2],'rental_fee': 350.0})
+
+#Display rental information
+for rental in rentals:
+    print(f"Rental ID: {rental['rental_id']}, Customer: {rental['customer']['name']}, Car:{rental['car']['make']}, Rental Fee: INR {rental['rental_fee']}")
